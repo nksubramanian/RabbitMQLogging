@@ -54,10 +54,29 @@ namespace Auth
             using (Activity activity = source.StartActivity("SomeWork"))
             {
                 var contextToInject = Activity.Current.Context;
+                string xq = "contextToInject trace id " + contextToInject.TraceId;
+                _logger.LogInformation(xq);
+                string zq = "contextToInject trace id " + contextToInject.SpanId;
+                _logger.LogInformation(zq);
+
+
+                _propagator.Inject(
+                new PropagationContext(contextToInject, Baggage.Current),
+                basicProps,
+                RabbitMqHelper.InjectTraceContextIntoBasicProperties);
+
+                RabbitMqHelper.AddMessagingTags(Activity.Current, "myqueue");
+
+                channel.BasicPublish(
+                            exchange: "",
+                            routingKey: "myqueue",
+                            basicProperties: basicProps,
+                            body: body);
+
             }
 
 
-            channel.BasicPublish("", "myqueue", null, body);
+            
 
             return response;
         }
