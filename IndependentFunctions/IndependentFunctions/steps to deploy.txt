@@ -1,0 +1,15 @@
+az login
+az group create --name NachiFunctionTest-rg --location westeurope
+az acr create --resource-group NachiFunctionTest-rg --name nachicontainerregistry --sku Basic --admin-enabled true
+az acr credential show --name nachicontainerregistry
+docker login nachicontainerregistry.azurecr.io -u nachicontainerregistry
+docker build -f DataProviderService\Sperry.MxA.DataProvider.Functions\Dockerfile -t nachicontainerregistry.azurecr.io/samplefunctions/tad:1 .
+docker push nachicontainerregistry.azurecr.io/samplefunctions/tad:1
+az storage account create --name funsgnachi --location westeurope --resource-group NachiFunctionTest-rg --sku Standard_LRS
+az functionapp plan create -g NachiFunctionTest-rg -n FunctionAppPlan --sku EP1 --is-linux true
+
+az functionapp create --resource-group NachiFunctionTest-rg -p FunctionAppPlan --deployment-container-image-name nachicontainerregistry.azurecr.io/samplefunctions/tad:1 --docker-registry-server-password HuAG/wwRBc96MlWOO2X974VkWxfa2sMe --docker-registry-server-user nachicontainerregistry --functions-version 3 --runtime dotnet-isolated --name FunctionForASBqwerty --storage-account funsgnachi
+
+az functionapp config appsettings set --name FunctionForASBqwerty --resource-group NachiFunctionTest-rg --settings "CONNECTION_STRING=amqps://kgorisxe:YTuRve7ht-pLgPknHbWa1UarLCMzzwV7@cattle.rmq2.cloudamqp.com/kgorisxe"
+
+set the environment variable for "ASPNETCORE_ENVIRONMENT" as well
