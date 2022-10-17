@@ -3,7 +3,7 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "CONNECTION_STRING": "amqp://guest:guest@localhost:49658//",
+    "CONNECTION_STRING": "amqps://gmtxfped:q9q2CrgirKMatFilFe-qlM4cMzGa4hii@beaver.rmq.cloudamqp.com/gmtxfped",
     "APPINSIGHTS_INSTRUMENTATIONKEY": "6e7616bc-535b-4242-9346-ee622eca7526"
   },
   "Host": {
