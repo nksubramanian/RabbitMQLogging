@@ -24,7 +24,7 @@ namespace Auth
         [Function("InputTrigger")]
         public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")] HttpRequestData req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            _logger.LogInformation("C# HTTP trigger function processed a request");
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");

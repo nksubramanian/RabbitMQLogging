@@ -16,7 +16,7 @@ namespace Auth
         [Function("RabbitQueue")]
         public void Run([RabbitMQTrigger("myqueue", ConnectionStringSetting = "CONNECTION_STRING")] string myQueueItem)
         {
-            _logger.LogInformation($"C# Queue trigger function processed: {myQueueItem}");
+            _logger.LogInformation($"Here is the queue message: {myQueueItem}");
         }
     }
 }
