@@ -1,8 +1,12 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
+using System.Text;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
+using OpenTelemetry.Context.Propagation;
+using RabbitMQ.Client;
 
 namespace Auth
 {
