@@ -13,12 +13,12 @@ namespace Auth
             FunctionContext executionContext)
         {
             var logger = executionContext.GetLogger("Function1");
-            logger.LogInformation("C# HTTP trigger function processed a request.");
+            logger.LogInformation("subramanian logging");
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
 
-            response.WriteString("Welcome to Azure Functions!");
+            response.WriteString("Welcome to Azure Functionsxxx!");
 
             return response;
         }
